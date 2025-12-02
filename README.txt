@@ -15,7 +15,10 @@ PennKey: 23629530
 I used a 2D of my custom Tile class to keep track of the tiles on the board. This is an appropriate
 use of the concept because 2048 is played on a grid, and 2D arrays naturally represent a grid of
 objects. Additionally, 2D arrays are great for algorithms (such as the tile-moving algorithm I
-implemented) that depend on motion
+implemented) that depend on moving across the array. The custom type contained in the 2D array,
+Tile, is appropriate since each element in the array needs to carry data about its display string
+and appearance colors. Of course, this could have been done with a Map, but it is more elegant to
+use a class that directly contains said data.
 
   2. I/O
 I used I/O to save the game state persistently to files/game_state.txt. Every time the user changes
@@ -30,9 +33,11 @@ I used a Stack<BoardState> to implement the undo feature. Every time the user ch
 the model will push the previous BoardState onto the stack, and every time the user presses the undo
 button, the model will pop the top off the stack (if it is nonempty) and replace the current board
 state. I decided on using Stack for this feature because I received feedback advising me to do so
-for my project proposal. This feature is appropriate for the Collections concept because Stack is
-being used as it should be (i.e. calling add() and pop()), and the data contained by the Stack is
-part of the core game state.
+for my project proposal. This feature is appropriate for the Collections concept because the board
+history Stack must grow or shrink during runtime, and the data contained by the Stack is part of the
+core game state. I didn't need to use a Deque because Board only needs to be able to access the top
+element of the Stack, while Deque provides unnecessary access to both the start and end of the
+queue.
 
   4. Testable Component
 I wrote several tests in src/test/java/org/cis1200/game2048/BoardTest.java which cover board
