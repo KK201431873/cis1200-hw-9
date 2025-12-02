@@ -13,7 +13,8 @@ PennKey: 23629530
 
   1. 2D Arrays
 I used a 2D of my custom Tile class to keep track of the tiles on the board. This is an appropriate
-use of the concept because 2048 is played on a grid, and 2D arrays naturally represent a grid
+use of the concept because 2048 is played on a grid, and 2D arrays naturally represent a grid of
+objects.
 
   2. I/O
 

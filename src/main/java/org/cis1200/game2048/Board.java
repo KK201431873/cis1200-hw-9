@@ -120,6 +120,14 @@ public class Board {
     }
 
     /**
+     * Getter method for testing/debugging purposes ONLY.
+     * @return This board's history.
+     */
+    public Stack<BoardState> getBoardHistory() {
+        return this.boardHistory;
+    }
+
+    /**
      * Getter method for testing/debugging purposes.
      * @return The current BoardState as a 2D array of {@code Tile.State}s.
      */
