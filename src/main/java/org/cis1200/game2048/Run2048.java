@@ -6,7 +6,8 @@ import java.awt.*;
 /**
  * Game Main class that specifies the frame and widgets of the GUI
  */
-public class Run2048 implements Runnable{
+public class Run2048 implements Runnable {
+
     @Override
     public void run() {
         // NOTE : recall that the 'final' keyword notes immutability even for

@@ -1,7 +1,6 @@
 package org.cis1200.game2048;
 
 import java.io.*;
-import java.nio.file.NoSuchFileException;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 import java.util.StringTokenizer;
@@ -14,7 +13,7 @@ import org.cis1200.game2048.Tile.State;
  */
 public class GameSaverLoader {
 
-    private final File GAME_FILE;
+    private final File gameFile;
 
     /**
      * Creates a new {@code GameSaverLoader} object with the given game file path.
@@ -22,8 +21,8 @@ public class GameSaverLoader {
      */
     public GameSaverLoader(String filePath) {
         try {
-            GAME_FILE = new File(filePath);
-            if (GAME_FILE.createNewFile()) {
+            gameFile = new File(filePath);
+            if (gameFile.createNewFile()) {
                 System.out.println("Created new game file at " + filePath);
             } else {
                 System.out.println("Found game file at " + filePath);
@@ -39,7 +38,7 @@ public class GameSaverLoader {
      * @param boardHistory The past {@code BoardState}s.
      */
     public void saveGame(BoardState board, Stack<BoardState> boardHistory) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(GAME_FILE))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(gameFile))) {
             // First write current board score and state
             writeBoardState(writer, board);
 
@@ -53,7 +52,7 @@ public class GameSaverLoader {
                 writeBoardState(writer, boardState);
             }
         } catch (IOException e) {
-            System.out.println("Failed to save game to " + GAME_FILE.getPath());
+            System.out.println("Failed to save game to " + gameFile.getPath());
             e.printStackTrace();
         }
     }
@@ -64,7 +63,7 @@ public class GameSaverLoader {
      * @return The last (or new) 2048 game.
      */
     public Board loadGame() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(GAME_FILE))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(gameFile))) {
             // Read current board score and state
             BoardState curBoard = readBoardState(reader);
 

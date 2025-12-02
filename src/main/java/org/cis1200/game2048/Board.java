@@ -242,8 +242,8 @@ public class Board {
         LEFT(0,-1),
         RIGHT(0,1);
 
-        public final int dr;
-        public final int dc;
+        private final int dr;
+        private final int dc;
 
         MoveDirection(int dr, int dc) {
             this.dr = dr;
