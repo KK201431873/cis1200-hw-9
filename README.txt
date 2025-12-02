@@ -80,13 +80,35 @@ is difficult with Swing.
 Run2048: implements Runnable and creates the JFrame, adds a BoardUI, and also adds the instructions
 button & manages the instructions popup.
 
+BoardTest: contains tests for Board.
+
 - Were there any significant stumbling blocks while you were implementing your
   game (related to your design, or otherwise)?
-
+One of the most difficult parts of the Board implementation was the moving and merging algorithm,
+since there are so many ways to do it, many of which I have strong reasons for why they are not good
+design. I initially considered writing four separate methods for merging up, down, left, and right,
+but I felt that would be extremely redundant and wanted a more general helper function. However,
+the algorithm for such function was nontrivial, especially since moving in different directions can
+mean iterating over columns or rows and accounting for 0 or max index edge cases, which could also
+result in a lot of if-statements and redundant code. I ultimately settled on an algorithm that
+treats the given MoveDirection as a vector, finds an orthogonal vector for iterating over lines,
+goes to the farthest element in each line, and merging tiles backwards (i.e. in the negative
+MoveDirection vector direction). It took quite a bit of debugging to get right, but it ultimately
+led to elegant code.
 
 - Evaluate your design. Is there a good separation of functionality? How well is
   private state encapsulated? What would you refactor, if given the chance?
-
+I think I encapsulated private state well, except for testing/debugging methods like
+getBoardHistory() in Board.java, which I needed for a test in BoardTest. I think I separated the
+functionality between the game's model and GUI well, since none of my tests needed to reference
+anything in BoardUI or Run2048.
+I don't particularly like how I created the inner BoardState class within the Board class, since I
+originally imagined a separation of the levels of abstraction: BoardState would deal with lower-
+level algorithms compared to Board, but this ultimately made accessing fields clunky and forced me
+to write redundant getter/setter methods for both classes. If I were to refactor my code, I think
+I would move the BoardState class to a different file. I don't think I'll be able to completely
+delete BoardState because the boardHistory Stack needs to keep track of both scores and tile grids.
+It would be even more clunky to have two Stacks, one for scores and one for tile grids.
 
 
 ========================
@@ -95,3 +117,11 @@ button & manages the instructions popup.
 
 - Cite any external resources (images, tutorials, etc.) that you may have used 
   while implementing your game.
+https://stackoverflow.com/questions/8802320/draw-text-with-graphics-object-on-jframe
+https://stackoverflow.com/questions/69149687/how-to-open-a-new-window-on-button-click-in-swing-gui-using-java
+https://stackoverflow.com/questions/9554636/the-use-of-multiple-jframes-good-or-bad-practice
+https://stackoverflow.com/questions/21228740/how-do-i-keep-a-jbutton-from-changing-size
+https://stackoverflow.com/questions/17244713/using-filewriter-and-bufferedwriter-clearing-file-for-some-reason
+https://stackoverflow.com/questions/25219423/setalignmentxcenter-alignment-does-not-center-boxlayout-in-jframe
+https://stackoverflow.com/questions/14380035/java-font-size-from-width
+https://stackoverflow.com/questions/21247776/java-swing-how-to-smoothly-animate-move-component
