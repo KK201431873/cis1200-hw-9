@@ -12,8 +12,8 @@ import java.awt.event.KeyEvent;
  */
 public class BoardUI extends JPanel {
 
-    private final int SIDE_LENGTH;
-    private final int GRID_SIZE;
+    private final int sideLength;
+    private final int gridSize;
     private final Board board;
     private final JLabel scoreLabel, gameStatusLabel;
     private final GameSaverLoader gameSaverLoader;
@@ -24,8 +24,8 @@ public class BoardUI extends JPanel {
      * @param gridSize Number of tiles along each side of the board (e.g. 4 means a 4x4 grid).
      */
     public BoardUI(int sideLength, int gridSize) {
-        this.SIDE_LENGTH = sideLength;
-        this.GRID_SIZE = gridSize;
+        this.sideLength = sideLength;
+        this.gridSize = gridSize;
         this.gameSaverLoader = new GameSaverLoader("files/game_state.txt");
         this.board = gameSaverLoader.loadGame();
         saveGame();
@@ -102,7 +102,7 @@ public class BoardUI extends JPanel {
 
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(SIDE_LENGTH, SIDE_LENGTH);
+                return new Dimension(BoardUI.this.sideLength, BoardUI.this.sideLength);
             }
         };
         boardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -216,16 +216,16 @@ public class BoardUI extends JPanel {
 
         // draw background/outline
         g2d.setColor(Color.decode("#bfaba3"));
-        g2d.fillRect(0, 0, SIDE_LENGTH, SIDE_LENGTH);
+        g2d.fillRect(0, 0, sideLength, sideLength);
 
         // draw tiles
         State[][] boardState = board.getBoardState();
-        int gridSideLength = (int) ((double)SIDE_LENGTH / GRID_SIZE);
+        int gridSideLength = (int) ((double) sideLength / gridSize);
         int tileMargin = gridSideLength / 20;
         int tileLength = gridSideLength - 2 * tileMargin;
         int roundRectRadius = tileLength / 10;
-        for (int i = 0; i < GRID_SIZE; i++) {
-            for (int j = 0; j < GRID_SIZE; j++) {
+        for (int i = 0; i < gridSize; i++) {
+            for (int j = 0; j < gridSize; j++) {
                 // draw tile box
                 int x1 = j * gridSideLength;
                 int y1 = i * gridSideLength;
@@ -253,13 +253,13 @@ public class BoardUI extends JPanel {
                     g2d.setFont(new Font(
                             "Arial",
                             Font.BOLD,
-                            52 - 4*Math.max(0, s.length()-1)
+                            52 - 4 * Math.max(0, s.length() - 1)
                     ));
                     FontMetrics fm = g2d.getFontMetrics();
                     g2d.drawString(
                             s,
-                            cx - fm.stringWidth(s)/2,
-                            cy - fm.getHeight()/2 + fm.getAscent()
+                            cx - fm.stringWidth(s) / 2,
+                            cy - fm.getHeight() / 2 + fm.getAscent()
                     );
                 } else {
                     // draw empty background

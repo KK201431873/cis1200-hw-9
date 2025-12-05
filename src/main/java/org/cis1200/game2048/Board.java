@@ -120,6 +120,14 @@ public class Board {
     }
 
     /**
+     * Getter method for testing/debugging purposes ONLY.
+     * @return This board's history.
+     */
+    public Stack<BoardState> getBoardHistory() {
+        return this.boardHistory;
+    }
+
+    /**
      * Getter method for testing/debugging purposes.
      * @return The current BoardState as a 2D array of {@code Tile.State}s.
      */
@@ -234,8 +242,8 @@ public class Board {
         LEFT(0,-1),
         RIGHT(0,1);
 
-        public final int dr;
-        public final int dc;
+        private final int dr;
+        private final int dc;
 
         MoveDirection(int dr, int dc) {
             this.dr = dr;

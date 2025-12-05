@@ -95,7 +95,9 @@ public class Tile {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Tile tile = (Tile) o;
         return state == tile.state;
     }
