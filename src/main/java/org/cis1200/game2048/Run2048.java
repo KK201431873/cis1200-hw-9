@@ -59,11 +59,22 @@ public class Run2048 implements Runnable {
                     Each move, a new tile is generated in one of the empty spaces on the board<br>
                     and is 2 (the lowest value) 90% of the time and 4 the other 10% of the time.<br>
                     <br>
+                    <b><u>Winning & Losing:</b></u><br>
+                    When you merge two 1024 tiles, a 2048 tile is created and you win. If the<br>
+                    board is full without a 2048 tile, and no up, down, left, or right movement<br>
+                    merges any tiles, you lose. In both the win and loss scenarios, the player<br>
+                    cannot continue playing until they press the "undo" or the "reset" button.<br>
+                    <br>
                     <b><u>Controls:</b></u><br>
                     All you need are the four arrow keys (or WASD) to push tiles in any of the<br>
                     four cardinal directions: up, down, left, or right. You can undo your last<br>
                     move at any time by pressing the "undo" button. To reset the board<br>
-                    entirely, press the "reset" button.
+                    entirely, press the "reset" button.<br>
+                    <br>
+                    <b><u>Scorekeeping:</b></u><br>
+                    When you merge two tiles together, your score increases by the value of the<br>
+                    new tile. No points are awarded for generating new tiles. Winning the game<br>
+                    typically requires scoring around 22,000 points. See if you can beat that!<br>
                     </html>
                     """;
             JLabel instructionsLabel = new JLabel(instructions);

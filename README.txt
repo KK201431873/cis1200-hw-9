@@ -12,10 +12,10 @@ PennKey: 23629530
   submitting your proposal.
 
   1. 2D Arrays
-I used a 2D of my custom Tile class to keep track of the tiles on the board. This is an appropriate
-use of the concept because 2048 is played on a grid, and 2D arrays naturally represent a grid of
-objects. Additionally, 2D arrays are great for algorithms (such as the tile-moving algorithm I
-implemented) that depend on moving across the array. The custom type contained in the 2D array,
+I used a 2D array of my custom Tile class to keep track of the tiles on the board. This is an
+appropriate use of the concept because 2048 is played on a grid, and 2D arrays naturally represent a
+grid of objects. Additionally, 2D arrays are great for algorithms (such as the tile-moving algorithm
+I implemented) that require traversing across a grid. The custom type contained in the 2D array,
 Tile, is appropriate since each element in the array needs to carry data about its display string
 and appearance colors. Of course, this could have been done with a Map, but it is more elegant to
 use a class that directly contains said data.
@@ -31,9 +31,9 @@ handling and using FileReader/FileWriter.
   3. Collections
 I used a Stack<BoardState> to implement the undo feature. Every time the user changes the board,
 the model will push the previous BoardState onto the stack, and every time the user presses the undo
-button, the model will pop the top off the stack (if it is nonempty) and replace the current board
-state. I decided on using Stack for this feature because I received feedback advising me to do so
-for my project proposal. This feature is appropriate for the Collections concept because the board
+button, the model will pop the top of the stack (if it is nonempty) and replace the current board
+state. I decided to use Stack for this feature because I received feedback advising me to do so for
+my project proposal. This feature is appropriate for the Collections concept because the board
 history Stack must grow or shrink during runtime, and the data contained by the Stack is part of the
 core game state. I didn't need to use a Deque because Board only needs to be able to access the top
 element of the Stack, while Deque provides unnecessary access to both the start and end of the
@@ -42,11 +42,11 @@ queue.
   4. Testable Component
 I wrote several tests in src/test/java/org/cis1200/game2048/BoardTest.java which cover board
 initialization, moving tiles in all directions, scorekeeping, board state history, undo, win/loss,
-and IO actions like saving/loading games. This usage of the Testable Component concept is
-appropriate because there are at least 13 total tests (10 for the concept plus 3 minimum tests)
-and they all target the game's core model independent of the GUI. These tests are all distinct from
-each other, since even though moveUp and moveDown both test moving, the direction is significant
-due to edge cases such as array index being 0 or array.length-1.
+and saving/loading IO operations. This usage of the Testable Component concept is appropriate
+because there are at least 13 total tests (10 for the concept plus 3 minimum tests) and they all
+target the game's core model independent of the GUI. These tests are all distinct from each other,
+since even though moveUp and moveDown both test moving, the direction is significant due to edge
+cases such as array index being 0 or array.length-1.
 
 ===============================
 =: File Structure Screenshot :=
@@ -97,7 +97,7 @@ the algorithm for such function was nontrivial, especially since moving in diffe
 mean iterating over columns or rows and accounting for 0 or max index edge cases, which could also
 result in a lot of if-statements and redundant code. I ultimately settled on an algorithm that
 treats the given MoveDirection as a vector, finds an orthogonal vector for iterating over lines,
-goes to the farthest element in each line, and merging tiles backwards (i.e. in the negative
+goes to the farthest element in each line, and merges tiles backwards (i.e. in the negative
 MoveDirection vector direction). It took quite a bit of debugging to get right, but it ultimately
 led to elegant code.
 
